@@ -11,9 +11,9 @@ import { buttonVariants } from "@/components/ui/button";
 // import UserAccountNav from './UserAccountNav'
 // import MobileNav from './MobileNav'
 
-const NavBar = () => {
+const NavBar = async() => {
   const { getUser } = getKindeServerSession();
-  const user = getUser();
+  const user =await getUser();
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
@@ -25,7 +25,7 @@ const NavBar = () => {
             <>
               <Link
                 target="_blank"
-                href="https://github.com/rohitt-gupta/chatpdf-saas"
+                href="https://github.com/NepThunder/chatwithpdfdocument"
                 className={buttonVariants({
                   variant: "ghost",
                   size: "sm",
