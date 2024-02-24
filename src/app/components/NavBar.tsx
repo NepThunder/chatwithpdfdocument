@@ -22,8 +22,10 @@ const NavBar = async() => {
             <span>SimplifyAI</span>
           </Link>
           <div className="hidden items-center space-x-4 sm:flex">
+
+            {/* To DO: MobileNav Bar */}
             <>
-              <Link
+              {/* <Link
                 target="_blank"
                 href="https://github.com/NepThunder/chatwithpdfdocument"
                 className={buttonVariants({
@@ -31,16 +33,16 @@ const NavBar = async() => {
                   size: "sm",
                 })}
               >
-                <Github className="w-5 h-5" />
-              </Link>
+                <Github className="w-5 h-5" /> */}
+              {/* </Link> */}
               <LoginLink
-                className={buttonVariants({
-                  variant: "ghost",
-                  size: "sm",
-                })}
-              >
-                Sign in
-              </LoginLink>
+                  className={buttonVariants({
+                    variant: "ghost",
+                    size: "sm",
+                  })}
+                >
+                  Sign in
+                </LoginLink>
               <RegisterLink
                 className={buttonVariants({
                   size: "sm",
