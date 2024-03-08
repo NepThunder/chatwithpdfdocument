@@ -2,7 +2,7 @@
 
 import { Ghost, Loader2, MessageSquare, Plus, Trash } from "lucide-react";
 import { trpc } from "../_trpc/client";
-import UploadButton  from "./UploadButton";
+import UploadButton from "./UploadButton";
 import Skeleton from "react-loading-skeleton";
 import Link from "next/link";
 import { format } from "date-fns";
@@ -10,9 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const Dashboard = () => {
-  const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
-    string | null
-  >(null);
+  const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<String | null>(null);
 
   const utils = trpc.useUtils();
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
@@ -70,7 +68,7 @@ const Dashboard = () => {
 
                   <div className="flex items-center gap-2">
                     <MessageSquare className="h-4 w-4" />
-                    mocked
+                    Chat
                   </div>
                   <Button
                     size="sm"
