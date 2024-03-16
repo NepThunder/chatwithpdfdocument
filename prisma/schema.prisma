@@ -11,6 +11,9 @@ model User{
   id String @id @unique
   email String @unique
   File File[]
+
+  Message Message[]
+
 }
 
 enum UploadStatus{
@@ -28,10 +31,26 @@ model File{
 
   url String
   key String
+  message Message[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
  
   User User? @relation(fields:[userId], references:[id])
   userId String?
+}
+
+model Message{
+  id String @id @default(cuid())
+  text String @db.Text()
+  
+  isUserMessage Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
+
+  User User? @relation(fields:[userId], references:[id])
+  userId String?
+  File File? @relation(fields:[fileId], references:[id])
+  fileId String?
 }
