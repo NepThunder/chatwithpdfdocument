@@ -33,10 +33,9 @@ export const ourFileRouter = {
         const blob = await response.blob();
         const loader=new PDFLoader(blob);
         const pageLevelDocs=await loader.load();
-        const pagesAmt=pageLevelDocs.length;
         
         //verctorize and index entire document
-        const pineconeIndex=pinecone.Index("simplifyai")
+        const pineconeIndex=pinecone.Index(process.env.PINECONE_INDEX!)
 
         const embeddings= new OpenAIEmbeddings({
           openAIApiKey: process.env.OPENAI_API_KEY,
