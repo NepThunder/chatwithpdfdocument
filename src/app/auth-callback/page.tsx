@@ -1,32 +1,38 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
 
-const page = () => {
-  const router = useRouter();
+const Page = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AuthCallback />
+    </Suspense>
+  );
+};
 
-  const searchParams = useSearchParams()
-  const origin = searchParams.get('origin')
+const AuthCallback = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const origin = searchParams.get('origin');
 
   const { data, isLoading } = trpc.authCallBack.useQuery(undefined, {
     onSuccess: ({ success }) => {
       if (success) {
-        // user is synced to db
-        router.push(origin ? `/${origin}` : '/dashboard')
+        router.push(origin ? `/${origin}` : '/dashboard');
       }
     },
     onError: (err) => {
       if (err.data?.code === 'UNAUTHORIZED') {
-        router.push("/sign-in")
+        router.push("/sign-in");
       }
     },
     retry: true,
     retryDelay: 500,
-  })
+  });
 
   return (
     <div className='w-full mt-24 flex justify-center'>
@@ -38,7 +44,7 @@ const page = () => {
         <p>You will be redirected automatically.</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;
