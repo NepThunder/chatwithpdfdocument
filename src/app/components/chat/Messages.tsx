@@ -3,6 +3,9 @@ import { INFINITE_QUERY_LIMIT } from "@/config/infiniteQuery";
 import { Loader2, MessageSquare } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import Message from "./Message";
+import { useContext, useEffect, useRef } from "react";
+import { ChatContext } from "./ChatContext";
+import {useIntersection} from '@mantine/hooks'
 
 
 interface MessageProps{
@@ -10,6 +13,9 @@ interface MessageProps{
 }
 
 const Messages=({fileId}:MessageProps)=>{
+
+    const{isLoading:isAiThinking}=useContext(ChatContext)
+
     const {data,isLoading,fetchNextPage} =trpc.getFileMessages.useInfiniteQuery({
         fileId,
         limit:INFINITE_QUERY_LIMIT,
@@ -32,7 +38,20 @@ const Messages=({fileId}:MessageProps)=>{
         )
     }
 
-    const combinedMessages=[...(true?[loadingMessage]:[]),...(messages??[])]
+    const combinedMessages=[...(isAiThinking?[loadingMessage]:[]),...(messages??[])]
+
+    const lastMessageRef=useRef<HTMLDivElement>(null)
+
+    const{ref,entry}=useIntersection({
+      root:lastMessageRef.current,
+      threshold:1
+    })
+
+    useEffect(()=>{
+      if(entry?.isIntersecting){
+        fetchNextPage()
+      }
+    },[entry,fetchNextPage])
 
     return (
         <div className='flex max-h-[calc(100vh-3.5rem-7rem)] border-zinc-200 flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch'>
