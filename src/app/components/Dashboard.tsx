@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const Dashboard = () => {
-  const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<String | null>(null);
+  const [currentlyDeletingFile, setFile] = useState<String | null>(null);
 
   const utils = trpc.useUtils();
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
@@ -19,12 +19,16 @@ const Dashboard = () => {
       utils.getUserFiles.invalidate();
     },
     onMutate({ id }) {
-      setCurrentlyDeletingFile(id);
+      setFile(id);
     },
     onSettled() {
-      setCurrentlyDeletingFile(null);
+      setFile(null);
     },
   });
+
+  const handleClick = (fileid:string)=> {
+    console.log(fileid)
+  }
 
   return (
     <main className="mx-auto max-w-7xl md:p-10">
@@ -47,6 +51,7 @@ const Dashboard = () => {
               >
                 <Link
                   href={`/dashboard/${file.id}`}
+                  onClick={()=>handleClick(file.id)}
                   className="flex flex-col gap-2"
                 >
                   <div className="pt-6 px-6 flex w-full items-center justify-between space-x-6">

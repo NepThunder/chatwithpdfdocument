@@ -6,25 +6,28 @@ import { notFound, redirect } from 'next/navigation'
 
 interface PageProps {
   params: {
-    fileId: string
+    fileid: string
   }
 }
 
 const Page = async ({ params }: PageProps) => {
-  const { fileId } = params
+  console.log(params)
+  const { fileid } = params
 
   const { getUser } = getKindeServerSession()
   const user = await getUser()
 
   if (!user || !user.id)
-    redirect(`/auth-callback?origin=dashboard/${fileId}`)
+    redirect(`/auth-callback?origin=dashboard`)
 
-  const file = await db.file.findFirst({
+    // console.log(params)
+    const file = await db.file.findFirst({
     where: {
-      id: fileId,
+      id: fileid,
       userId: user.id,
     },
   })
+  // console.log(file)
 
   if (!file) notFound()
 
@@ -48,6 +51,3 @@ const Page = async ({ params }: PageProps) => {
 }
 
 export default Page
-
-
-  

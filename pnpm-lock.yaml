@@ -11,6 +11,12 @@ dependencies:
   '@kinde-oss/kinde-auth-nextjs':
     specifier: ^2.1.13
     version: 2.1.15(@babel/core@7.24.0)(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)
+  '@langchain/openai':
+    specifier: ^0.0.21
+    version: 0.0.21
+  '@langchain/pinecone':
+    specifier: ^0.0.3
+    version: 0.0.3
   '@mantine/hooks':
     specifier: ^7.6.2
     version: 7.6.2(react@18.2.0)
@@ -1834,6 +1840,16 @@ packages:
       - encoding
     dev: false
 
+  /@langchain/pinecone@0.0.3:
+    resolution: {integrity: sha512-uhmGdiF6OLL583kQNMdKl799+3E1nQphrZ4a/Y/yQcXKUPVNZYwNLUimK1ws80RBhfqR7DKvywkvERoOsvCDlA==}
+    engines: {node: '>=18'}
+    dependencies:
+      '@langchain/core': 0.1.48
+      '@pinecone-database/pinecone': 2.1.0
+      flat: 5.0.2
+      uuid: 9.0.1
+    dev: false
+
   /@mantine/hooks@7.6.2(react@18.2.0):
     resolution: {integrity: sha512-ZrOgrZHoIGCDKrr2/9njDgK0al+jjusYQFlmR0YyEFyRtgY6eNSI4zuYLcAPx1haHmUm5RsLBrqY6Iy/TLdGXA==}
     peerDependencies:
@@ -1973,6 +1989,16 @@ packages:
 
   /@pinecone-database/pinecone@1.1.3:
     resolution: {integrity: sha512-bGldvvoAr4agVZ2ql4RZesXIDjMLjnuqNmKYfMQoVO3UFRYeuO9z+1WJodvanGIPY2iGh1w9yz0jDAkBiT53qw==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@sinclair/typebox': 0.29.6
+      ajv: 8.12.0
+      cross-fetch: 3.1.8(encoding@0.1.13)
+      encoding: 0.1.13
+    dev: false
+
+  /@pinecone-database/pinecone@2.1.0:
+    resolution: {integrity: sha512-sbU5+FZ2yhG+tJYwEochoZei5988OLWZyM2aT4wenWc6sbKGV69Jm9Yl4yix10NNglzfksF9avkte1a0/k7x5Q==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@sinclair/typebox': 0.29.6
