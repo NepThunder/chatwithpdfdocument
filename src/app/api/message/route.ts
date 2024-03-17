@@ -1,7 +1,7 @@
 import { db } from '@/db'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
-import { PineconeStore } from 'langchain/vectorstores/pinecone'
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { PineconeStore } from "langchain/vectorstores/pinecone";
 import { NextRequest } from 'next/server'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { SendMessageValidator } from '@/app/lib/validators/SendMessageValidator'

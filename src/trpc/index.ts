@@ -31,10 +31,9 @@ export const appRouter = router({
   }),
 
   getUserFiles: privateProcedure.query(async ({ ctx }) => {
-    const { user } = ctx;
     return await db.file.findMany({
       where: {
-        userId: user.id,
+        userId: ctx.user.id,
       },
     });
   }),
