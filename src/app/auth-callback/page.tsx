@@ -1,14 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 
-import { useRouter } from 'next/router'
-import React, { Suspense } from 'react'
+import React, { Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
 
-const page = () => {
-  const router = useRouter();
-
+const Page = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <AuthCallback />
@@ -18,17 +16,18 @@ const page = () => {
 
 const AuthCallback = () => {
   const router = useRouter();
-  const origin = new URLSearchParams(router.asPath).get('origin');
+  const searchParams = useSearchParams();
+  const origin = searchParams.get('origin');
 
   const { data, isLoading } = trpc.authCallBack.useQuery(undefined, {
     onSuccess: ({ success }) => {
       if (success) {
-        router.push(origin ? `/${origin}` : '/dashboard')
+        router.push(origin ? `/${origin}` : '/dashboard');
       }
     },
     onError: (err) => {
       if (err.data?.code === 'UNAUTHORIZED') {
-        router.push("/sign-in")
+        router.push("/sign-in");
       }
     },
     retry: true,
@@ -48,4 +47,4 @@ const AuthCallback = () => {
   );
 };
 
-export default page;
+export default Page;
