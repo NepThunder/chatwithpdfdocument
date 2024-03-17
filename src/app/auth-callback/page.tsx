@@ -9,8 +9,7 @@ import { Loader2 } from 'lucide-react';
 const page = () => {
   const router = useRouter();
 
-  const searchParams = useSearchParams()
-  const origin = searchParams.get('origin')
+  const origin = useSearchParams().get('origin')
 
   const { data, isLoading } = trpc.authCallBack.useQuery(undefined, {
     onSuccess: ({ success }) => {
