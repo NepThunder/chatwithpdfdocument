@@ -3,7 +3,7 @@ import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 const handler = (req: Request) =>
   fetchRequestHandler({
-    endpoint: "/api/trpc",
+    endpoint: "https://simplifyai.vercel.app/api/trpc",
     req,
     router: appRouter,
     createContext: () => ({}),
