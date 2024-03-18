@@ -17,7 +17,6 @@ function Page() {
       router.push("/sign-in");
     }
 
-    // success
     else if (!isLoading) {
       router.push((data !== undefined && data.success && origin) ? `/${origin}` : "/dashboard");
     }
