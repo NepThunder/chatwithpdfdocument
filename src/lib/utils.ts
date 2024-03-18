@@ -7,8 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function constructMetadata({
-  title = "SimplifyAi- Changing the way to interact with PDF files",
-  description = "SimplifyAi is Efficient and friendly, accessible to everyone, innovative",
+  title = "SimplifyAI- Changing the way to interact with PDF files",
+  description = "SimplifyAI is Efficient and friendly, accessible to everyone, innovative",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
   noIndex = false
