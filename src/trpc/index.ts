@@ -6,7 +6,7 @@ import { z } from "zod";
 import { INFINITE_QUERY_LIMIT } from "@/config/infiniteQuery";
 
 export const appRouter = router({
-  authCallBack: publicProcedure.query(async () => {
+  authCallback: publicProcedure.query(async () => {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
