@@ -1,27 +1,26 @@
-'use client'
-
-import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/server'
-import { ArrowRight, Menu } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+"use client"
+import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/server';
+import { ArrowRight, Menu } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
-  const [isOpen, setOpen] = useState<boolean>(false)
+  const [isOpen, setOpen] = useState<boolean>(false);
 
-  const toggleOpen = () => setOpen((prev) => !prev)
+  const toggleOpen = () => setOpen((prev) => !prev);
 
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (isOpen) toggleOpen()
-  }, [pathname])
+    if (isOpen) toggleOpen();
+  }, [pathname, isOpen]);
 
   const closeOnCurrent = (href: string) => {
     if (pathname === href) {
-      toggleOpen()
+      toggleOpen();
     }
-  }
+  };
 
   return (
     <div className='sm:hidden'>
@@ -82,7 +81,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
         </div>
       ) : null}
     </div>
-  )
-}
+  );
+};
 
-export default MobileNav
+export default MobileNav;
