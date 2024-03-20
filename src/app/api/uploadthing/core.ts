@@ -6,11 +6,18 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 
-const f = createUploadthing();
+const f = createUploadthing({
+  errorFormatter: (err) => {
+    console.log("Error uploading file", err.message);
+    console.log("  - Above error caused by:", err.cause);
+
+    return { message: err.message };
+  },
+});
 
 export const ourFileRouter = {
   pdfUploader: f({ pdf: { maxFileSize: "16MB" } })
-    .middleware(async ({ req }) => {
+    .middleware(async () => {
       const { getUser } = getKindeServerSession();
       const user = await getUser();
       if (!user || !user.id) throw new Error("UNAUTHORIZED");
@@ -18,6 +25,14 @@ export const ourFileRouter = {
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
+      const isFileExist = await db.file.findFirst({
+        where: {
+          key: file.key,
+        },
+      });
+    
+      // If file already exists, stop running (prevents duplicates)
+      if (isFileExist) return;
       const createdFile = await db.file.create({
         data: {
           key: file.key,

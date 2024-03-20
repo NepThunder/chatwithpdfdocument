@@ -49,13 +49,13 @@ const UploadDropzone = () => {
   return (
     <Dropzone
       multiple={false}
-      onDrop={async (acceptedFile) => {
+      onDrop={async (acceptedFiles) => {
         setIsUploading(true);
 
         const progressInterval = startSimulateProgress();
 
         // handle file uploading
-        const res = await startUpload(acceptedFile);
+        const res = await startUpload(acceptedFiles);
 
         if (!res) {
           return toast({
@@ -146,12 +146,12 @@ const UploadDropzone = () => {
 };
 
 const UploadButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <Dialog
       open={isOpen}
-      onOpenChange={(visible) => {
+      onOpenChange={(visible:boolean) => {
         if (!visible) setIsOpen(visible);
       }}
     >
