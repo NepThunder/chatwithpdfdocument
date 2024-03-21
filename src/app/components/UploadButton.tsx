@@ -59,7 +59,7 @@ const UploadDropzone = () => {
 
         if (!res) {
           return toast({
-            title: "Something went wrong",
+            title: "Size should be 16Mb or less",
             description: "Please try again",
             variant: "destructive",
           });
