@@ -155,11 +155,11 @@ const UploadButton = () => {
         if (!visible) setIsOpen(visible);
       }}
     >
-      <DialogTrigger
-        asChild
+      <DialogTrigger 
         onClick={() => {
           setIsOpen(true);
         }}
+        asChild
       >
         <Button>Upload PDF</Button>
       </DialogTrigger>
